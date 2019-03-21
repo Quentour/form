@@ -1,4 +1,4 @@
-<form action="form.php" method="post">
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <div>
       <label  for="name">Nom :</label>
       <input  type="text"  id="name"  name="name" required>
@@ -11,10 +11,10 @@
 <input type="tel" id="phone" name="phone" placeholder="0123456789" 
 pattern="[0-9]{10}" required>
     <select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
+  <option value="volvo">choix1</option>
+  <option value="saab">choix2</option>
+  <option value="mercedes">choix3</option>
+  <option value="audi">choix4</option>
 </select>
     <div>
       <label  for="message">Message :</label>
@@ -26,9 +26,8 @@ pattern="[0-9]{10}" required>
   </form>
 
   <?php
-  echo var_dump($_POST);
-$name = $email = $phone = $message = "";
-
+$nameErr = $firstnameErr = $mailErr = $phoneErr = $messageErr = "";
+$name = $firstname= $mail = $phone = $message = "";
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -36,12 +35,43 @@ function test_input($data) {
   return $data;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = test_input($_POST["name"]);
-  $email = test_input($_POST["email"]);
-  $phone = test_input($_POST["phone"]);
-  $message = test_input($_POST["message"]);
+
   header("Location: ./succes.php");
 }
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (empty($_POST["name"])) {
+		$nameErr = 'Name is mandatory';
+	}else{
+  	$name = test_input($_POST["name"]);
+  	}
+
+	if (empty($_POST["email"])) {
+		$mailErr ="Email is mandatory";
+	}else{
+	$mail = test_input($_POST["email"]);
+	}
+	   // check if e-mail address is well-formed  
+	if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+	$mailErr = "Invalid email format";
+	}
+	if (empty($_POST["phone"])) {
+  		$phoneErr ="phone number is mandatory";
+  	}else{
+  	$phone = test_input($_POST["phone"]);
+	}  
+	if (empty($_POST["message"])) {
+  		$messageErr ="Message is mandatory";
+  	}else{
+  	$message = test_input($_POST["message"]);
+	} 
+}
+if ($nameErr == "" and $mailErr =="" and $phoneErr == "" and $messageErr == "" and !empty($_POST)) {
+	header("Location: ./succes.php");
+}
+
+
 
 
 ?>
