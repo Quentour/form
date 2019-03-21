@@ -34,10 +34,6 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-  header("Location: ./succes.php");
-}
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
