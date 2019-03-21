@@ -26,8 +26,8 @@ pattern="[0-9]{10}" required>
   </form>
 
   <?php
-$nameErr = $firstnameErr = $mailErr = $phoneErr = $messageErr = "";
-$name = $firstname= $mail = $phone = $message = "";
+$nameErr = $mailErr = $phoneErr = $messageErr = "";
+$name = $mail = $phone = $message = "";
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
