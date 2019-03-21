@@ -42,28 +42,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (empty($_POST["name"])) {
-		$nameErr = 'Name is mandatory';
-	}else{
+	$nameErr = 'Name is mandatory';
+	}
+	else{
   	$name = test_input($_POST["name"]);
   	}
 
 	if (empty($_POST["email"])) {
 		$mailErr ="Email is mandatory";
-	}else{
+	}
+	else{
 	$mail = test_input($_POST["email"]);
 	}
-	   // check if e-mail address is well-formed  
+	 
 	if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
 	$mailErr = "Invalid email format";
 	}
+
 	if (empty($_POST["phone"])) {
   		$phoneErr ="phone number is mandatory";
-  	}else{
+  	}
+	else{
   	$phone = test_input($_POST["phone"]);
 	}  
+	
 	if (empty($_POST["message"])) {
   		$messageErr ="Message is mandatory";
-  	}else{
+  	}
+	else{
   	$message = test_input($_POST["message"]);
 	} 
 }
